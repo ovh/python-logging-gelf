@@ -3,7 +3,6 @@
 
 .. image:: https://readthedocs.org/projects/logging-gelf/badge/?version=latest
     :target: http://logging-gelf.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
 
 
 ************
