@@ -1,0 +1,14 @@
+language: python
+python:
+- 3.5
+script:
+- python setup.py build
+deploy:
+  provider: pypi
+  user: cdumay
+  password:
+    secure: OiKaaWVyCV2Yu0Qos0Bz59flKu4nbYTdmoefJV0FvcUODMl2eX7chnqd8lgeTOjDqy1hbdBOCbLstTLmsYkmXN5TqRZRbhBu48FvRCgOOS4zf/gKq3JJDbAJ/izWYxwCHJdsSTNp9A+5dz/85UXaEoM+kMaOtsez5M7OOmrW8kc3RVuELVrCbRph+zg7UVBV7u9b+qK1xCL3aQ1T0+avW4mYyrpGKjmgOBeFJKcTbvv/qvqSsaNkfKQJyYjvMRf5tjcEpjwVlYXVtarUbWb0WWOooCJgBnCFfM/jFXALtxjul2WVxsBnxG/HIeZx/TczDSdLSirQDVhagH3CSyiUmuPBWuO6z4hNlH64WLyVzin9evBic7NAxiDb08eUioAmy67Q4YJcNKFgV6EVm1aoZ/jcqIDXAt0NrviCF5EngUPYQDTDw3y49RqSuslijPpznFeBaVTkR6XnSAYRm3c/UjItBLb8gmm/EA9SXU06kyMdzFP2Z4FYewj10hWg8RQk0x5oxDZHbA4qAMI03OjcmwFpcYDwHiX+yzo7UeMzb6EDBUz6nI0cDJ9UEDvEbs1zrb9zlj+nDlpurkUpYueq1/ARdUoHduvlEKRsoeorJxDkM/E9/8LvZGfpaMfI/bUNR3mhtenHfjzY9CE2aC9wC6+l0647GMiDYMKGJGYWriE=
+  on:
+    tags: true
+    distributions: sdist
+    repo: cdumay/logging-gelf

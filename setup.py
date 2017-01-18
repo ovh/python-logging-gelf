@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 setup(
     name='logging-gelf',
     version=open('VERSION', 'r').read().strip(),
-    description="Flask TAT client",
+    description="Logging bundle to send logs using GELF",
     long_description=open('README.rst', 'r').read().strip(),
     classifiers=["Programming Language :: Python"],
     keywords='',
