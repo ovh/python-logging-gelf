@@ -3,18 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to logging-gelf's documentation!
-========================================
+logging-gelf
+============
 
-Contents:
+A python 3 logging bundle to send logs using GELF. This is a rewrote of `Djehouty <https://github.com/ovh/djehouty>`_
 
+Guide
+-----
 .. toctree::
    :maxdepth: 2
 
 
-
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
