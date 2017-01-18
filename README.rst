@@ -2,8 +2,8 @@
     :target: https://travis-ci.org/cdumay/logging-gelf
 
 .. image:: https://readthedocs.org/projects/logging-gelf/badge/?version=latest
-:target: http://logging-gelf.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
+    :target: http://logging-gelf.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 
 ************
