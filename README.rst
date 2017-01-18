@@ -3,12 +3,14 @@ Logging GELF
 ************
 
 .. image:: https://travis-ci.org/cdumay/logging-gelf.svg?branch=master
-    :target: https://travis-ci.org/cdumay/logging-gelf
-    :alt: Latest version
+   :target: https://travis-ci.org/cdumay/logging-gelf
+   :alt: Latest version
+
 
 .. image:: https://readthedocs.org/projects/logging-gelf/badge/
-    :target: http://logging-gelf.readthedocs.io/en/latest/
-    :alt: Documentation
+   :target: http://logging-gelf.readthedocs.io/en/latest/
+   :alt: Documentation
+
 
 A python logging bundle to send logs using GELF. This is a rewrote of `Djehouty <https://github.com/ovh/djehouty>`_
 
