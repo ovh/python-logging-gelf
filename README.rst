@@ -7,9 +7,9 @@ Logging GELF
    :alt: Latest version
 
 
-.. image:: https://readthedocs.org/projects/logging-gelf/badge/
-   :target: http://logging-gelf.readthedocs.io/en/latest/
-   :alt: Documentation
+.. image:: https://readthedocs.org/projects/logging-gelf/badge/?version=latest
+   :target: http://logging-gelf.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
 
 A python logging bundle to send logs using GELF. This is a rewrote of `Djehouty <https://github.com/ovh/djehouty>`_
