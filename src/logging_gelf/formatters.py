@@ -12,7 +12,9 @@ from logging_gelf.schemas import GelfSchema
 
 
 class GELFFormatter(logging.Formatter):
-    """GELFFormatter"""
+    """A GELF formatter to format a :class:logging.LogRecord into Graylog Extended Lenght Format (GELF)
+
+    """
 
     def __init__(self, schema=GelfSchema, null_character=False):
         if not issubclass(schema, GelfSchema):
@@ -23,7 +25,12 @@ class GELFFormatter(logging.Formatter):
         logging.Formatter.__init__(self)
 
     def format(self, record):
-        """format"""
+        """Format the specified record into json using the schema which MUST inherit from :class:`GelfSchema`.
+
+        :param logging.LogRecord record: Contains all the information pertinent to the event being logged.
+        :return: A JSON dump of the record.
+        :rtype: str
+        """
         out = json.dumps(self.schema().dump(record).data)
         if self.null_character is True:
             out += '\0'
