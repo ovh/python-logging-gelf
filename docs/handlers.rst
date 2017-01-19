@@ -11,29 +11,29 @@
 
     The :class:`GELFTCPSocketHandler`, which inherit from :class:`logging.handlers.SocketHandler`, sends logging output to a TCP network socket.
 
-.. method:: GELFTCPSocketHandler.__init__(host, port, use_tls=False, cert_reqs=<ssl.CERT_NONE>, ca_certs=None)
+    .. method:: __init__(host, port, use_tls=False, cert_reqs=<ssl.CERT_NONE>, ca_certs=None)
 
-    Returns a new instance of the :class:`GELFTCPSocketHandler` class intended to
-    communicate with a remote machine whose address is given by *host* and *port* over TCP.
+        Returns a new instance of the :class:`GELFTCPSocketHandler` class intended to
+        communicate with a remote machine whose address is given by *host* and *port* over TCP.
 
-    :param bool use_tls: Enable TLS communication.
-    :param enum.IntEnum cert_reqs: SSL context virify mode. This attribute must be one of :const:`ssl.CERT_NONE`, :const:`ssl.CERT_OPTIONAL` or :const:`ssl.CERT_REQUIRED` (see `ssl doc <https://docs.python.org/3/library/ssl.html#constants>`_).
-    :param str ca_certs: File which contains a set of concatenated "certification authority" certificates, which are used to validate certificates passed from the other end of the connection.
+        :param bool use_tls: Enable TLS communication.
+        :param enum.IntEnum cert_reqs: SSL context virify mode. This attribute must be one of :const:`ssl.CERT_NONE`, :const:`ssl.CERT_OPTIONAL` or :const:`ssl.CERT_REQUIRED` (see `ssl doc <https://docs.python.org/3/library/ssl.html#constants>`_).
+        :param str ca_certs: File which contains a set of concatenated "certification authority" certificates, which are used to validate certificates passed from the other end of the connection.
 
-.. method:: GELFTCPSocketHandler.makeSocket(timeout=1)
+    .. method:: makeSocket(timeout=1)
 
-    Returns the socket used to send log records.
+        Returns the socket used to send log records.
 
-    :param float timeout: Set a timeout on blocking socket operations, can be a nonnegative floating point number expressing seconds.
-    :return: a TCP socket.
-    :rtype: `socket.socket <https://docs.python.org/3/library/socket.html#socket.socket>`_
+        :param float timeout: Set a timeout on blocking socket operations, can be a nonnegative floating point number expressing seconds.
+        :return: a TCP socket.
+        :rtype: `socket.socket <https://docs.python.org/3/library/socket.html#socket.socket>`_
 
-.. method:: GELFTCPSocketHandler.makePickle(record)
+    .. method:: makePickle(record)
 
-    Pickles the record’s attribute dictionary in binary format.
+        Pickles the record’s attribute dictionary in binary format.
 
-    :param logging.LogRecord record: record to format
-    :rtype: bytes
+        :param logging.LogRecord record: record to format
+        :rtype: bytes
 
 
 Basic TCP example
@@ -43,12 +43,12 @@ Basic TCP example
 
     >>> import logging
     >>> from logging_gelf.handlers import GELFTCPSocketHandler
+
     # we create the logger
     >>> logger = logging.getLogger("gelf")
     >>> logger.setLevel(logging.DEBUG)
     >>> handler = GELFTCPSocketHandler(host="127.0.0.1", port=12201, level=logging.DEBUG)
     >>> logger.addHandler(handler)
-
 
 .. seealso::
 
