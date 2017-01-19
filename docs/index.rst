@@ -6,10 +6,10 @@
 logging-gelf
 ============
 
-A python 3 logging bundle to send logs in Graylog Extended Lenght Format (GELF). This is a rewrote of `Djehouty <https://github.com/ovh/djehouty>`_
+A python 3 logging bundle to send logs in Graylog Extended Lenght Format (GELF)
+. This is a rewrote of `Djehouty <https://github.com/ovh/djehouty>`_. The basic
+classes defined by the module, together with their functions, are listed below:
 
-Guide
------
 .. toctree::
    :maxdepth: 2
 

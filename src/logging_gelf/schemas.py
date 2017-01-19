@@ -4,7 +4,7 @@
 """
 .. codeauthor:: Cédric Dumay <cedric.dumay@gmail.com>
 
-
+Schema allow to specify a mapping for :class:`logging.LogRecord`. It based on :class:`marshmallow.Schema`. All schema MUST inherit from :class:`logging_gelf.schemas.GelfSchema`.
 """
 import socket
 import time
