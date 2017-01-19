@@ -1,14 +1,34 @@
-Formatters
-==========
+:mod:`logging_gelf.formatters` --- Formatters
+=============================================
 
-.. automodule:: logging_gelf.formatters
+.. module:: logging_gelf.formatters
+    :synopsis: Formatters specify the layout of log records into GELF.
 
-.. autoclass:: logging_gelf.formatters.GELFFormatter
+.. moduleauthor:: Cedric Dumay <cedric.dumay@gmail.com>
+.. sectionauthor:: Cedric Dumay <cedric.dumay@gmail.com>
 
-    .. automethod:: logging_gelf.formatters.GELFFormatter.format
 
-Examples
---------
+.. py:class:: GELFFormatter
+
+    A subclass of :class:`logging.Formatter` to format LogRecord into GELF.
+
+.. method:: GELFFormatter.__init__(schema=<logging_gelf.schemas.GelfSchema>, null_character=False)
+
+    A GELF formatter to format a :class:`logging.LogRecord` into GELF.
+
+    :param logging_gelf.schemas.GelfSchema schema: The marshmallow schema to use to format data.
+    :param bool null_character: Append a '\0' at the end of the string. It depends on the input used.
+
+.. py:method:: GELFFormatter.format(record)
+
+    Format the specified record into json using the schema which MUST inherit from :class:`logging_gelf.schemas.GelfSchema`.
+
+    :param logging.LogRecord record: Contains all the information pertinent to the event being logged.
+    :return: A JSON dump of the record.
+    :rtype: str
+
+Testing the output
+------------------
 
 You can use the :class:`logging.StreamHandler` to test your formatter:
 
