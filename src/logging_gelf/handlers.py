@@ -7,7 +7,6 @@
 
 """
 import ssl
-import logging
 from logging.handlers import SocketHandler
 
 

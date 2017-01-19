@@ -8,7 +8,7 @@
 .. sectionauthor:: Cedric Dumay <cedric.dumay@gmail.com>
 
 
-.. py:class:: GELFFormatter
+.. class:: GELFFormatter
 
     A subclass of :class:`logging.Formatter` to format LogRecord into GELF.
 
@@ -19,7 +19,7 @@
     :param logging_gelf.schemas.GelfSchema schema: The marshmallow schema to use to format data.
     :param bool null_character: Append a '\0' at the end of the string. It depends on the input used.
 
-.. py:method:: GELFFormatter.format(record)
+.. method:: GELFFormatter.format(record)
 
     Format the specified record into json using the schema which MUST inherit from :class:`logging_gelf.schemas.GelfSchema`.
 
@@ -48,3 +48,7 @@ You can use the :class:`logging.StreamHandler` to test your formatter:
     >>> logger.debug("hello !")
     {"version": "1.1", "host": "host.example.com", "file": "<stdin>", "short_message": "hello !", "timestamp": 1484820522.4268215, "level": 7, "line": 1}
 
+.. seealso::
+
+    `Formatter Objects <https://docs.python.org/3/library/logging.html#formatter-objects>`_
+        Official python documentation
