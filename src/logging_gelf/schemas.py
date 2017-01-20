@@ -46,13 +46,30 @@ class GelfSchema(Schema):
         """description of to_message"""
         return value.getMessage()
 
+    @staticmethod
+    def key_path(*args):
+        """description of key_path"""
+        return "_".join(args)
+
+    @staticmethod
+    def to_flat_dict(prefix, data):
+        flat_result = dict()
+        for dkey, dvalue in data.items():
+            path = GelfSchema.key_path(prefix, dkey)
+            if isinstance(dvalue, dict):
+                flat_result.update(GelfSchema.to_flat_dict(path, dvalue))
+            else:
+                flat_result[path] = dvalue
+        return flat_result
+
     @post_dump
     def fix_additional_fields(self, data):
         """description of fix_additional_fields"""
         result = dict()
         for key, value in data.items():
-            if key in GELF_1_1_FIELDS:
-                result[key] = value
+            rkey = key if key in GELF_1_1_FIELDS else '_{}'.format(key)
+            if isinstance(value, dict):
+                result.update(self.to_flat_dict(rkey, value))
             else:
-                result['_{}'.format(key)] = value
+                result[rkey] = value
         return result
