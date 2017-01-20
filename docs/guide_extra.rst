@@ -1,3 +1,5 @@
+.. _logging-extra:
+
 Forward logging extra to Graylog
 ================================
 
@@ -27,7 +29,7 @@ To forward extra send in :class:`logging.LogRecord`, we need customize the marsh
 
     # we send a log entry
     >>> logger.debug("hello !", extra=dict(username="C.Dumay"))
-    {"level": 7, "_username": "C.Dumay", "timestamp": 1484842992.1332045, "host": "linux-426s", "version": "1.1", "short_message": "hello !", "file": "<stdin>", "line": 1}
+    {"level": 7, "_username": "C.Dumay", "timestamp": 1484842992.1332045, "host": "host.example.com", "version": "1.1", "short_message": "hello !", "file": "<stdin>", "line": 1}
 
 .. note::
 
