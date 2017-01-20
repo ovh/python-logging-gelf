@@ -6,6 +6,7 @@
 
 
 """
+import socket
 import ssl
 from logging.handlers import SocketHandler
 
@@ -21,9 +22,15 @@ class GELFTCPSocketHandler(SocketHandler):
         self.cert_reqs = cert_reqs
         self.use_tls = use_tls
 
-    def makeSocket(self, timeout=1):
+    def makeSocket(self, timeout=1, after_idle_sec=1, interval_sec=3,
+                   max_fails=5):
         """makeSocket"""
         sock = SocketHandler.makeSocket(self, timeout=timeout)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, after_idle_sec)
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, interval_sec)
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, max_fails)
+
         if self.use_tls is True:
             return ssl.wrap_socket(
                 sock, cert_reqs=self.cert_reqs, ca_certs=self.ca_certs

@@ -20,11 +20,14 @@
         :param enum.IntEnum cert_reqs: SSL context virify mode. This attribute must be one of :const:`ssl.CERT_NONE`, :const:`ssl.CERT_OPTIONAL` or :const:`ssl.CERT_REQUIRED` (see `ssl doc <https://docs.python.org/3/library/ssl.html#constants>`_).
         :param str ca_certs: File which contains a set of concatenated "certification authority" certificates, which are used to validate certificates passed from the other end of the connection.
 
-    .. method:: makeSocket(timeout=1)
+    .. method:: makeSocket(timeout=1, after_idle_sec=1, interval_sec=3, max_fails=5)
 
         Returns the socket used to send log records.
 
         :param float timeout: Set a timeout on blocking socket operations, can be a nonnegative floating point number expressing seconds.
+        :param int after_idle_sec: Activates TCP keepalive after *after_idle_sec* second of idleness.
+        :param int interval_sec: Sends a keepalive ping once every *interval_sec* seconds.
+        :param int max_fails: Closes the connection after *max_fails* failed ping (= *max_fails* * *interval_sec*).
         :return: a TCP socket.
         :rtype: `socket.socket <https://docs.python.org/3/library/socket.html#socket.socket>`_
 
