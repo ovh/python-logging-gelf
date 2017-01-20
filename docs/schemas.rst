@@ -1,5 +1,5 @@
-:mod:`logging_gelf.shemas` --- Schemas
-======================================
+:mod:`logging_gelf.schemas` --- Schemas
+=======================================
 
 .. module:: logging_gelf.schemas
     :synopsis: Marshmallow schemas used to serialize log record data
