@@ -42,10 +42,3 @@ Documentation content
    api_focus.rst
    guides.rst
 
-
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-
