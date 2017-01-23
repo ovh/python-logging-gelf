@@ -44,7 +44,7 @@ class GelfSchema(Schema):
     @classmethod
     def to_message(cls, value):
         """description of to_message"""
-        return value.getMessage()
+        return value.getMessage() % vars(value)
 
     @staticmethod
     def key_path(*args):
