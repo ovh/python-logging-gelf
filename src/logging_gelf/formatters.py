@@ -11,6 +11,18 @@ import logging
 from logging_gelf.schemas import GelfSchema
 
 
+class StringJSONEncoder(json.JSONEncoder):
+    def encode(self, o):
+        """description of encode"""
+        res = dict()
+        for key, value in o.items():
+            if isinstance(value, (list, tuple, dict)):
+                res[key] = str(value)
+            else:
+                res[key] = value
+        return json.JSONEncoder.encode(self, res)
+
+
 class GELFFormatter(logging.Formatter):
     """A GELF formatter to format a :class:`logging.LogRecord` into GELF.
 
@@ -19,12 +31,14 @@ class GELFFormatter(logging.Formatter):
 
     """
 
-    def __init__(self, schema=GelfSchema, null_character=False):
+    def __init__(self, schema=GelfSchema, null_character=False,
+                 JSONEncoder=json.JSONEncoder):
         if not issubclass(schema, GelfSchema):
             raise ValueError("Schema MUST inherit from 'GelfSchema'")
 
         self.schema = schema
         self.null_character = null_character
+        self._encoder_cls = JSONEncoder
         logging.Formatter.__init__(self)
 
     def format(self, record):
@@ -34,7 +48,7 @@ class GELFFormatter(logging.Formatter):
         :return: A JSON dump of the record.
         :rtype: str
         """
-        out = json.dumps(self.schema().dump(record).data)
+        out = json.dumps(self.schema().dump(record).data, cls=self._encoder_cls)
         if self.null_character is True:
             out += '\0'
         return out
