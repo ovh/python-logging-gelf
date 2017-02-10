@@ -33,7 +33,7 @@ The following example shows how to send log in Graylog TCP input
     logger.setLevel(logging.DEBUG)
 
     handler = GELFTCPSocketHandler(host="127.0.0.1", port=12201)
-    handler.setFormatter(GELFFormatter(schema=MyGelfSchema, null_character=True))
+    handler.setFormatter(GELFFormatter(null_character=True))
     logger.addHandler(handler)
     logger.debug("hello !")
 
