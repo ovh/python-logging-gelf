@@ -106,7 +106,7 @@ As Graylog doesn't support objects, Nested marshmallow fields are "flat unpacked
     >>> class Person(Schema):
     ...     firstname = fields.String()
     ...
-    >>> class Familly(GelfSchema):
+    >>> class Family(GelfSchema):
     ...     lastname = fields.String()
     ...     father = fields.Nested(Person)
     ...
@@ -114,7 +114,7 @@ As Graylog doesn't support objects, Nested marshmallow fields are "flat unpacked
     >>> logger = logging.getLogger("gelf")
     >>> logger.setLevel(logging.DEBUG)
     >>> handler = logging.StreamHandler(sys.stdout)
-    >>> handler.setFormatter(GELFFormatter(schema=Familly))
+    >>> handler.setFormatter(GELFFormatter(schema=Family))
     >>> logger.addHandler(handler)
     >>> logger.debug("A marshmallow example with Nested", extra=familly)
     {"level": 7, "_father_firstname": "Cedric", "short_message": "A marshmallow example with Nested", "_lastname": "Dumay", "file": "<stdin>", "host": "host.example.com", "timestamp": 1484919251.3890517, "version": "1.1", "line": 1}

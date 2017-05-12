@@ -6,3 +6,4 @@ Guides
 
    guide_extra.rst
    guide_adapter.rst
+   guide_ldp.rst

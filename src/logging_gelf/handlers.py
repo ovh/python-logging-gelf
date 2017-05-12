@@ -8,7 +8,7 @@
 """
 import socket
 import ssl
-from logging.handlers import SocketHandler
+from logging.handlers import SocketHandler, DatagramHandler
 
 
 class GELFTCPSocketHandler(SocketHandler):
@@ -37,5 +37,10 @@ class GELFTCPSocketHandler(SocketHandler):
             )
         return sock
 
+    def makePickle(self, record):
+        return bytes(self.format(record) + "\n", "UTF-8")
+
+
+class GELFUDPSocketHandler(DatagramHandler):
     def makePickle(self, record):
         return bytes(self.format(record) + "\n", "UTF-8")
