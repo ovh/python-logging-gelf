@@ -7,6 +7,33 @@
 .. moduleauthor:: Cedric Dumay <cedric.dumay@gmail.com>
 .. sectionauthor:: Cedric Dumay <cedric.dumay@gmail.com>
 
+.. class:: GELFUDPSocketHandler
+
+    .. versionadded:: 0.0.7
+
+    This handler send log entries over UDP.
+
+    .. method:: makePickle(record)
+
+        Pickles the record’s attribute dictionary in binary format.
+
+        :param logging.LogRecord record: record to format
+        :rtype: bytes
+
+Basic UDP example
+-----------------
+
+.. code-block:: python
+
+    >>> import logging
+    >>> from logging_gelf.handlers import GELFUDPSocketHandler
+
+    # we create the logger
+    >>> logger = logging.getLogger("gelf")
+    >>> logger.setLevel(logging.DEBUG)
+    >>> handler = GELFUDPSocketHandler(host="127.0.0.1", port=12202)
+    >>> logger.addHandler(handler)
+
 .. class:: GELFTCPSocketHandler
 
     The :class:`GELFTCPSocketHandler`, which inherit from :class:`logging.handlers.SocketHandler`, sends logging output to a TCP network socket.

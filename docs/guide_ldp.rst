@@ -6,6 +6,9 @@ Send logs to OVH LDP
 You can easly send logs to the `OVH Logs Data Platform service <https://www.ovh.com/fr/data-platforms/logs/>`_
 using a custom :class:`logging_gelf.formatters.GELFFormatter` with your stream token.
 
+Example
+-------
+
 The following example show how send structured log records (see: :ref:`logging-extra`) with the token
 **483fea61-1886-4ec8-93b4-a8d7d05af8af** on the UDP input of the cluster **gra1.logs.ovh.com**.
 
@@ -53,5 +56,8 @@ The following example show how send structured log records (see: :ref:`logging-e
 
     In this example, we set the suffix **_num** to the field **age** to force
     casting type in LDP (see: `The field naming convention <https://docs.ovh.com/gb/en/mobile-hosting/logs-data-platform/field-naming-conventions/#id2>`_)
+
+Log entry in Graylog
+--------------------
 
 .. image:: _static/ldp.png
