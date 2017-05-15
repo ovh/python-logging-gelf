@@ -2,6 +2,10 @@
 Logging GELF
 ************
 
+.. image:: https://img.shields.io/pypi/v/logging-gelf.svg
+   :target: https://pypi.python.org/pypi/logging-gelf/
+   :alt: Latest Version
+
 .. image:: https://travis-ci.org/cdumay/logging-gelf.svg?branch=master
    :target: https://travis-ci.org/cdumay/logging-gelf
    :alt: Latest version
