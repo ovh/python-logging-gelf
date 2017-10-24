@@ -26,9 +26,10 @@ class StringJSONEncoder(json.JSONEncoder):
 class GELFFormatter(logging.Formatter):
     """A GELF formatter to format a :class:`logging.LogRecord` into GELF.
 
-    :param logging_gelf.schemas.GelfSchema schema: The marshmallow schema to use to format data.
-    :param bool null_character: Append a '\0' at the end of the string. It depends on the input used.
-
+    :param logging_gelf.schemas.GelfSchema schema: The marshmallow schema to
+    use to format data.
+    :param bool null_character: Append a '\0' at the end of the string. It
+    depends on the input used.
     """
 
     def __init__(self, schema=GelfSchema, null_character=False,
@@ -42,9 +43,11 @@ class GELFFormatter(logging.Formatter):
         logging.Formatter.__init__(self)
 
     def format(self, record):
-        """Format the specified record into json using the schema which MUST inherit from :class:`logging_gelf.schemas.GelfSchema`.
+        """Format the specified record into json using the schema which MUST
+        inherit from :class:`logging_gelf.schemas.GelfSchema`.
 
-        :param logging.LogRecord record: Contains all the information pertinent to the event being logged.
+        :param logging.LogRecord record: Contains all the information pertinent
+        to the event being logged.
         :return: A JSON dump of the record.
         :rtype: str
         """

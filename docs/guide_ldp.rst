@@ -10,7 +10,7 @@ Example
 -------
 
 The following example show how send structured log records (see: :ref:`logging-extra`) with the token
-**483fea61-1886-4ec8-93b4-a8d7d05af8af** on the UDP input of the cluster **gra1.logs.ovh.com**.
+**483fea61-1886-4ec8-93b4-a8d7d05af8af** on the TCP input of the cluster **gra1.logs.ovh.com**.
 
 .. code-block:: python
 
@@ -18,7 +18,7 @@ The following example show how send structured log records (see: :ref:`logging-e
     from logging_gelf.formatters import GELFFormatter
     from marshmallow import fields, Schema
     from logging_gelf.schemas import GelfSchema
-    from logging_gelf.handlers import GELFUDPSocketHandler
+    from logging_gelf.handlers import GELFTCPSocketHandler
 
     # a "generic" object
     class User(object):
@@ -33,7 +33,7 @@ The following example show how send structured log records (see: :ref:`logging-e
 
     class LDPSchema(GelfSchema):
         user = fields.Nested(UserSchema)
-        age_num = fields.Integer(default=42)
+        age = fields.Integer(default=42, dump_to="age_num")
         token = fields.Constant(
             "483fea61-1886-4ec8-93b4-a8d7d05af8af", dump_only=True,
             dump_to="X-OVH-TOKEN"
@@ -43,7 +43,7 @@ The following example show how send structured log records (see: :ref:`logging-e
     logger = logging.getLogger("gelf-udp-example")
     logger.setLevel(logging.DEBUG)
 
-    handler = GELFUDPSocketHandler("gra1.logs.ovh.com", 2202)
+    handler = GELFTCPSocketHandler(host="gra1.logs.ovh.com", port=12202, use_tls=True)
     handler.setFormatter(GELFFormatter(schema=LDPSchema))
     logger.addHandler(handler)
 
