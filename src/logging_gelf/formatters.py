@@ -51,7 +51,7 @@ class GELFFormatter(logging.Formatter):
         :return: A JSON dump of the record.
         :rtype: str
         """
-        out = json.dumps(self.schema().dump(record).data, cls=self._encoder_cls)
+        out = json.dumps(self.schema().dump(record), cls=self._encoder_cls)
         if self.null_character is True:
             out += '\0'
         return out
