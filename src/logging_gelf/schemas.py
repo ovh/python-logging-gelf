@@ -46,9 +46,10 @@ class GelfSchema(Schema):
     @classmethod
     def to_message(cls, value):
         """description of to_message"""
+        # noinspection PyBroadException
         try:
             return value.getMessage() % vars(value)
-        except ValueError:
+        except Exception:
             return value.getMessage()
 
     @staticmethod

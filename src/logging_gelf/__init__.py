@@ -14,7 +14,7 @@ SYSLOG_LEVELS = {
 }
 
 
-## monkey patch
+# monkey patch
 def process(self, msg, kwargs):
     """
     Process the logging message and keyword arguments passed in to
@@ -31,6 +31,7 @@ def process(self, msg, kwargs):
     return msg, kwargs
 
 
+# noinspection PyPep8
 from logging import LoggerAdapter
 
 LoggerAdapter.process = process
