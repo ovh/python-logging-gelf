@@ -18,7 +18,7 @@
 
         :param logging_gelf.schemas.GelfSchema schema: The marshmallow schema to use to format data.
         :param bool null_character: Append a '\0' at the end of the string. It depends on the input used.
-            :param json.JSONEncoder JSONEncoder: A custom json encoder to use.
+        :param json.JSONEncoder JSONEncoder: A custom json encoder to use.
 
         .. method:: format(record)
 
