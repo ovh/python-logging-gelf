@@ -2,7 +2,7 @@
 =============================================
 
 .. module:: logging_gelf.formatters
-:synopsis: Formatters specify the layout of log records into GELF.
+    :synopsis: Formatters specify the layout of log records into GELF.
 
 .. moduleauthor:: Cedric Dumay <cedric.dumay@gmail.com>
 .. sectionauthor:: Cedric Dumay <cedric.dumay@gmail.com>
@@ -12,13 +12,17 @@
 
     A subclass of :class:`logging.Formatter` to format LogRecord into GELF.
 
-    .. method:: __init__(schema=<logging_gelf.schemas.GelfSchema>, null_character=False, JSONEncoder=json.JSONEncoder)
+    .. method:: __init__(schema=<logging_gelf.schemas.GelfSchema>, null_character=False, JSONEncoder=json.JSONEncoder, exclude_patterns=None)
 
         A GELF formatter to format a :class:`logging.LogRecord` into GELF.
 
         :param logging_gelf.schemas.GelfSchema schema: The marshmallow schema to use to format data.
         :param bool null_character: Append a '\0' at the end of the string. It depends on the input used.
         :param json.JSONEncoder JSONEncoder: A custom json encoder to use.
+        :param list|None exclude_patterns: List of regexp used to exclude keys
+
+        .. versionadded:: 0.0.12
+            The *exclude_patterns* parameter.
 
         .. method:: format(record)
 
@@ -27,6 +31,16 @@
         :param logging.LogRecord record: Contains all the information pertinent to the event being logged.
             :return: A JSON dump of the record.
             :rtype: str
+
+        .. method:: filter_keys(data):
+
+        Filter GELF record keys using exclude_patterns
+
+        :param dict data: Log record has dict
+            :return: the filtered log record
+            :rtype: dict
+
+        .. versionadded:: 0.0.12
 
 Testing the output
 ------------------
