@@ -30,6 +30,10 @@ class GelfSchema(Schema):
     lineno = fields.Integer(dump_to="line")
     pathname = fields.String(dump_to="file")
 
+    @staticmethod
+    def _forge_key(key, value):
+        return key
+
     @classmethod
     def to_syslog_level(cls, value):
         """description of to_syslog_level"""
@@ -57,13 +61,13 @@ class GelfSchema(Schema):
         """description of key_path"""
         return "_".join(args)
 
-    @staticmethod
-    def to_flat_dict(prefix, data):
+    @classmethod
+    def to_flat_dict(cls, prefix, data):
         flat_result = dict()
         for dkey, dvalue in data.items():
-            path = GelfSchema.key_path(prefix, dkey)
+            path = cls.key_path(prefix, cls._forge_key(dkey, dvalue))
             if isinstance(dvalue, dict):
-                flat_result.update(GelfSchema.to_flat_dict(path, dvalue))
+                flat_result.update(cls.to_flat_dict(path, dvalue))
             else:
                 flat_result[path] = dvalue
         return flat_result
@@ -73,7 +77,11 @@ class GelfSchema(Schema):
         """description of fix_additional_fields"""
         result = dict()
         for key, value in data.items():
-            rkey = key if key in GELF_1_1_FIELDS else '_{}'.format(key)
+            if key in GELF_1_1_FIELDS:
+                rkey = key
+            else:
+                rkey = '_{}'.format(self._forge_key(key, value))
+
             if isinstance(value, dict):
                 result.update(self.to_flat_dict(rkey, value))
             else:
