@@ -6,8 +6,8 @@ Logging GELF
    :target: https://pypi.python.org/pypi/logging-gelf/
    :alt: Latest Version
 
-.. image:: https://travis-ci.org/cdumay/logging-gelf.svg?branch=master
-   :target: https://travis-ci.org/cdumay/logging-gelf
+.. image:: https://travis-ci.org/ovh/logging-gelf.svg?branch=master
+   :target: https://travis-ci.org/ovh/logging-gelf
    :alt: Latest version
 
 
@@ -56,9 +56,9 @@ Project Links
 
 - Docs: http://logging-gelf.readthedocs.io/
 - PyPI: https://pypi.python.org/pypi/logging-gelf
-- Issues: https://github.com/cdumay/logging-gelf/issues
+- Issues: https://github.com/ovh/logging-gelf/issues
 
 License
 =======
 
-Apache License 2.0
+Licensed under `BSD 3-Clause License <./LICENSE>`_ or https://opensource.org/licenses/BSD-3-Clause.
