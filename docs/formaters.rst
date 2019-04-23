@@ -4,8 +4,8 @@
 .. module:: logging_gelf.formatters
     :synopsis: Formatters specify the layout of log records into GELF.
 
-.. moduleauthor:: Cedric Dumay <cedric.dumay@gmail.com>
-.. sectionauthor:: Cedric Dumay <cedric.dumay@gmail.com>
+.. moduleauthor:: Cedric Dumay <cedric.dumay@corp.ovh.com>
+.. sectionauthor:: Cedric Dumay <cedric.dumay@corp.ovh.com>
 
 
 .. class:: GELFFormatter

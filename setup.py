@@ -1,10 +1,10 @@
 # /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-.. codeauthor:: Cédric Dumay <cedric.dumay@gmail.com>
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+# Copyright 2019 The logging-gelf Authors. All rights reserved.
 
-"""
 from setuptools import setup, find_packages
 
 setup(
@@ -14,10 +14,10 @@ setup(
     long_description=open('README.rst', 'r').read().strip(),
     classifiers=["Programming Language :: Python"],
     keywords='',
-    author='Cedric DUMAY',
-    author_email='cedric.dumay@gmail.com',
-    url='https://github.com/cdumay/logging-gelf',
-    license='Apache License 2.0',
+    author='OVH SAS',
+    author_email='github@ovh.net',
+    url='https://github.com/ovh/logging-gelf',
+    license='BSD',
     py_modules=['logging_gelf'],
     include_package_data=True,
     zip_safe=True,

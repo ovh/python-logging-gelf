@@ -4,8 +4,8 @@
 .. module:: logging_gelf.handlers
     :synopsis: Handlers send the log records (created by loggers) to the appropriate GELF inputs.
 
-.. moduleauthor:: Cedric Dumay <cedric.dumay@gmail.com>
-.. sectionauthor:: Cedric Dumay <cedric.dumay@gmail.com>
+.. moduleauthor:: Cedric Dumay <cedric.dumay@corp.ovh.com>
+.. sectionauthor:: Cedric Dumay <cedric.dumay@corp.ovh.com>
 
 .. class:: GELFUDPSocketHandler
 

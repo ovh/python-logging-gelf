@@ -4,8 +4,8 @@
 .. module:: logging_gelf.schemas
     :synopsis: Marshmallow schemas used to serialize log record data
 
-.. moduleauthor:: Cedric Dumay <cedric.dumay@gmail.com>
-.. sectionauthor:: Cedric Dumay <cedric.dumay@gmail.com>
+.. moduleauthor:: Cedric Dumay <cedric.dumay@corp.ovh.com>
+.. sectionauthor:: Cedric Dumay <cedric.dumay@corp.ovh.com>
 
 .. class:: GelfSchema
 

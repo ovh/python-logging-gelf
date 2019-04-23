@@ -89,3 +89,4 @@ ENV/
 .ropeproject
 
 src/tests/
+.ovh-osp

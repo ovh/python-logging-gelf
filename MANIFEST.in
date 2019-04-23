@@ -1,3 +1,8 @@
-include VERSION
+include AUTHORS
+include CODE_OF_CONDUCT.md
+include CONTRIBUTING.md
+include CONTRIBUTORS
+include LICENSE
+include README.rst
 include requirements.txt
-include README.
+include VERSION

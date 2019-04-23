@@ -54,8 +54,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'logging-gelf'
-copyright = u'2017, C.Dumay'
-author = u'C.Dumay'
+copyright = u'2019-present, OVH SAS'
+author = u'OVH SAS'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
