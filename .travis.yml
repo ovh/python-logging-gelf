@@ -11,4 +11,4 @@ deploy:
   on:
     tags: true
     distributions: sdist
-    repo: cdumay/logging-gelf
+    repo: ovh/python-logging-gelf

@@ -16,7 +16,7 @@ setup(
     keywords='',
     author='OVH SAS',
     author_email='github@ovh.net',
-    url='https://github.com/ovh/logging-gelf',
+    url='https://github.com/ovh/python-logging-gelf',
     license='BSD',
     py_modules=['logging_gelf'],
     include_package_data=True,
