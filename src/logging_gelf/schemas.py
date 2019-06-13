@@ -32,8 +32,8 @@ class GelfSchema(Schema):
     lineno = fields.Integer(dump_to="line")
     pathname = fields.String(dump_to="file")
 
-    @staticmethod
-    def _forge_key(key, value):
+    @classmethod
+    def _forge_key(cls, key, _value):
         return key
 
     @classmethod
@@ -58,34 +58,35 @@ class GelfSchema(Schema):
         except Exception:
             return value.getMessage()
 
-    @staticmethod
-    def key_path(*args):
-        """description of key_path"""
-        return "_".join(args)
+    @classmethod
+    def format_key(cls, xpath, key, value):
+        if key in GELF_1_1_FIELDS:
+            return key
+        elif key in (None, ""):
+            return ""
+        elif xpath in (None, ""):
+            return "_{}".format(cls._forge_key(key, value))
+        else:
+            return "{}_{}".format(xpath, cls._forge_key(key, value))
 
     @classmethod
-    def to_flat_dict(cls, prefix, data):
-        flat_result = dict()
-        for dkey, dvalue in data.items():
-            path = cls.key_path(prefix, cls._forge_key(dkey, dvalue))
-            if isinstance(dvalue, dict):
-                flat_result.update(cls.to_flat_dict(path, dvalue))
-            else:
-                flat_result[path] = dvalue
-        return flat_result
+    def to_flat_dict(cls, xpath, key, value):
+        parts = dict()
+        if isinstance(value, dict):
+            for subkey, subvalue in value.items():
+                parts.update(cls.to_flat_dict(
+                    cls.format_key(xpath, key, value), subkey, subvalue
+                ))
+        elif isinstance(value, (list, tuple)):
+            for idx in range(len(value)):
+                parts.update(cls.to_flat_dict(
+                    cls.format_key(xpath, key, value), idx, value[idx]
+                ))
+        else:
+            parts[cls.format_key(xpath, key, value)] = value
+        return parts
 
     @post_dump
     def fix_additional_fields(self, data):
         """description of fix_additional_fields"""
-        result = dict()
-        for key, value in data.items():
-            if key in GELF_1_1_FIELDS:
-                rkey = key
-            else:
-                rkey = '_{}'.format(self._forge_key(key, value))
-
-            if isinstance(value, dict):
-                result.update(self.to_flat_dict(rkey, value))
-            else:
-                result[rkey] = value
-        return result
+        return self.to_flat_dict("", "", data)
