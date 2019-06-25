@@ -78,10 +78,16 @@ class GelfSchema(Schema):
                     cls.format_key(xpath, key, value), subkey, subvalue
                 ))
         elif isinstance(value, (list, tuple)):
-            for idx in range(len(value)):
-                parts.update(cls.to_flat_dict(
-                    cls.format_key(xpath, key, value), idx, value[idx]
-                ))
+            if len(value) < 20:
+                for idx in range(len(value)):
+                    parts.update(cls.to_flat_dict(
+                        cls.format_key(xpath, key, value), idx, value[idx]
+                    ))
+                else:
+                    try:
+                        parts[cls.format_key(xpath, key, value)] = str(value)
+                    except Exception:
+                        pass
         else:
             parts[cls.format_key(xpath, key, value)] = value
         return parts
