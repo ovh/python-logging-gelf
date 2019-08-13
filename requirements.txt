@@ -1,1 +1,1 @@
-marshmallow==3.0.0b7
+marshmallow>=3.0.0b7
