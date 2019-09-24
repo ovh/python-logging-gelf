@@ -83,11 +83,11 @@ class GelfSchema(Schema):
                     parts.update(cls.to_flat_dict(
                         cls.format_key(xpath, key, value), idx, value[idx]
                     ))
-                else:
-                    try:
-                        parts[cls.format_key(xpath, key, value)] = str(value)
-                    except Exception:
-                        pass
+            else:
+                try:
+                    parts[cls.format_key(xpath, key, value)] = str(value)
+                except Exception:
+                    pass
         else:
             parts[cls.format_key(xpath, key, value)] = value
         return parts
