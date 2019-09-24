@@ -93,6 +93,6 @@ class GelfSchema(Schema):
         return parts
 
     @post_dump
-    def fix_additional_fields(self, data):
+    def fix_additional_fields(self, data, **kwargs):
         """description of fix_additional_fields"""
         return self.to_flat_dict("", "", data)
