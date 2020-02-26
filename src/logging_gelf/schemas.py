@@ -12,7 +12,7 @@ Schema allow to specify a mapping for :class:`logging.LogRecord`. It based on
 """
 import socket
 import time
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, EXCLUDE
 from logging_gelf import SYSLOG_LEVELS
 from marshmallow import post_dump
 
@@ -23,14 +23,17 @@ GELF_1_1_FIELDS = [
 
 
 class GelfSchema(Schema):
+    class Meta:
+        unknown = EXCLUDE
+
     version = fields.Constant("1.1")
     host = fields.String(required=True, default=socket.gethostname)
     short_message = fields.Method('to_message')
     full_message = fields.String()
     timestamp = fields.Method('to_timestamp')
     level = fields.Method('to_syslog_level')
-    lineno = fields.Integer(dump_to="line")
-    pathname = fields.String(dump_to="file")
+    lineno = fields.Integer(data_key="line")
+    pathname = fields.String(data_key="file")
 
     @classmethod
     def _forge_key(cls, key, _value):
