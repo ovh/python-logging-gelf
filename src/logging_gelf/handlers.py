@@ -8,6 +8,7 @@
 import socket
 import ssl
 from logging.handlers import SocketHandler, DatagramHandler
+import platform
 
 
 class GELFTCPSocketHandler(SocketHandler):
@@ -21,14 +22,25 @@ class GELFTCPSocketHandler(SocketHandler):
         self.cert_reqs = cert_reqs
         self.use_tls = use_tls
 
-    def makeSocket(self, timeout=1, after_idle_sec=1, interval_sec=3,
-                   max_fails=5):
+    def makeSocket(self, timeout=1, **kwargs):
         """makeSocket"""
         sock = SocketHandler.makeSocket(self, timeout=timeout)
-        sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
-        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, after_idle_sec)
-        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, interval_sec)
-        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, max_fails)
+        sock.setsockopt(
+            socket.SOL_SOCKET, socket.SO_KEEPALIVE, kwargs.get('keep_alive', 1)
+        )
+        if platform.system() in ('Linux', 'Windows'):
+            sock.setsockopt(
+                socket.IPPROTO_TCP, socket.TCP_KEEPIDLE,
+                kwargs.get('after_idle_sec', 1)
+            )
+            sock.setsockopt(
+                socket.IPPROTO_TCP, socket.TCP_KEEPINTVL,
+                kwargs.get('interval_sec', 3)
+            )
+            sock.setsockopt(
+                socket.IPPROTO_TCP, socket.TCP_KEEPCNT,
+                kwargs.get('max_fails', 5)
+            )
 
         if self.use_tls is True:
             return ssl.wrap_socket(
