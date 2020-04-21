@@ -63,12 +63,13 @@ class GelfSchema(Schema):
 
     @classmethod
     def format_key(cls, xpath, key, value):
-        if key in GELF_1_1_FIELDS:
-            return key
-        elif key in (None, ""):
-            return ""
-        elif xpath in (None, ""):
-            return "_{}".format(cls._forge_key(key, value))
+        if xpath in (None, ""):
+            if key in GELF_1_1_FIELDS:
+                return key
+            elif key in (None, ""):
+                return ""
+            else:
+                return "_{}".format(cls._forge_key(key, value))
         else:
             return "{}_{}".format(xpath, cls._forge_key(key, value))
 
