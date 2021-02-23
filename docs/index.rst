@@ -6,8 +6,8 @@
 logging-gelf
 ============
 
-A python 3 logging bundle to send logs in Graylog Extended Lenght Format (GELF)
-. This is a rewrote of `Djehouty <https://github.com/ovh/djehouty>`_.
+A python 3 logging bundle to send logs in Graylog Extended Length Format (GELF)
+. This is a rewrite of `Djehouty <https://github.com/ovh/djehouty>`_.
 
 The following example shows how to send log in Graylog TCP input
 
