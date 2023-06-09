@@ -27,8 +27,8 @@ class GelfSchema(Schema):
         unknown = EXCLUDE
 
     version = fields.Constant("1.1")
-    host = fields.String(required=True, default=socket.gethostname)
-    short_message = fields.Method('to_message')
+    host = fields.String(required=True, dump_default=socket.gethostname)
+    message = fields.String(data_key="short_message")
     full_message = fields.String()
     timestamp = fields.Method('to_timestamp')
     level = fields.Method('to_syslog_level')
@@ -51,15 +51,6 @@ class GelfSchema(Schema):
             return value.created
         else:
             return time.time()
-
-    @classmethod
-    def to_message(cls, value):
-        """description of to_message"""
-        # noinspection PyBroadException
-        try:
-            return value.getMessage() % vars(value)
-        except Exception:
-            return value.getMessage()
 
     @classmethod
     def format_key(cls, xpath, key, value):
@@ -100,3 +91,9 @@ class GelfSchema(Schema):
     def fix_additional_fields(self, data, **kwargs):
         """description of fix_additional_fields"""
         return self.to_flat_dict("", "", data)
+
+    @post_dump
+    def remove_empty_values(self, data, **kwargs):
+        return {
+            key: value for key, value in data.items()
+            if value is not None and value != ""        }

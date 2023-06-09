@@ -58,6 +58,32 @@ class GELFFormatter(logging.Formatter):
         :return: A JSON dump of the record.
         :rtype: str
         """
+        # exc_info, exc_text and stack_info logic stolen from the standard library
+        # https://github.com/python/cpython/blob/3.8/Lib/logging/__init__.py#L655
+
+        if record.exc_info:
+            # Cache the traceback text to avoid converting it multiple times
+            # (it's constant anyway)
+            if not record.exc_text:
+                record.exc_text = self.formatException(record.exc_info)
+
+        record.message = record.getMessage() % vars(record)
+
+        record.full_message = ""
+        
+        if record.exc_text:
+            if record.msg[-1:] != "\n":
+                record.full_message = record.full_message + "\n"
+            record.full_message = record.full_message + record.exc_text
+            
+        if record.stack_info:
+            if record.full_message[-1:] != "\n":
+                record.full_message = record.full_message + "\n"
+            record.full_message = record.full_message + self.formatStack(record.stack_info)
+
+        if record.full_message != "":
+            record.full_message = record.message + "\n" + record.full_message
+
         data = self.filter_keys(self.schema().dump(record))
         out = json.dumps(data, cls=self._encoder_cls)
         if self.null_character is True:
