@@ -9,9 +9,10 @@
 Formatters specify the layout of log records in the final output (GELF).
 """
 
-import re
 import json
 import logging
+import re
+
 from logging_gelf.schemas import GelfSchema
 
 
@@ -49,14 +50,13 @@ class GELFFormatter(logging.Formatter):
         self.exclude_patterns = ['^_{}'.format(x) for x in exclude_patterns]
         logging.Formatter.__init__(self)
 
-    def format(self, record):
-        """Format the specified record into json using the schema which MUST
-        inherit from :class:`logging_gelf.schemas.GelfSchema`.
+    def serialize_record(self, record):
+        """Serialize logging record into a dict
 
         :param logging.LogRecord record: Contains all the information pertinent
         to the event being logged.
-        :return: A JSON dump of the record.
-        :rtype: str
+        :return: A dict dump of the record.
+        :rtype: dict
         """
         # exc_info, exc_text and stack_info logic stolen from the standard library
         # https://github.com/python/cpython/blob/3.8/Lib/logging/__init__.py#L655
@@ -70,22 +70,33 @@ class GELFFormatter(logging.Formatter):
         record.message = record.getMessage() % vars(record)
 
         record.full_message = ""
-        
+
         if record.exc_text:
             if record.msg[-1:] != "\n":
                 record.full_message = record.full_message + "\n"
             record.full_message = record.full_message + record.exc_text
-            
+
         if record.stack_info:
             if record.full_message[-1:] != "\n":
                 record.full_message = record.full_message + "\n"
-            record.full_message = record.full_message + self.formatStack(record.stack_info)
+            record.full_message = record.full_message + self.formatStack(
+                record.stack_info)
 
         if record.full_message != "":
             record.full_message = record.message + "\n" + record.full_message
 
-        data = self.filter_keys(self.schema().dump(record))
-        out = json.dumps(data, cls=self._encoder_cls)
+        return self.filter_keys(self.schema().dump(record))
+
+    def format(self, record):
+        """Format the specified record into json using the schema which MUST
+        inherit from :class:`logging_gelf.schemas.GelfSchema`.
+
+        :param logging.LogRecord record: Contains all the information pertinent
+        to the event being logged.
+        :return: A JSON dump of the record.
+        :rtype: str
+        """
+        out = json.dumps(self.serialize_record(record), cls=self._encoder_cls)
         if self.null_character is True:
             out += '\0'
         return out
