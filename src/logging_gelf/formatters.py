@@ -50,6 +50,21 @@ class GELFFormatter(logging.Formatter):
         self.exclude_patterns = ['^_{}'.format(x) for x in exclude_patterns]
         logging.Formatter.__init__(self)
 
+    @staticmethod
+    def get_record_message(record):
+        """Get record message
+
+        :param logging.LogRecord record: Contains all the information pertinent
+        to the event being logged.
+        :return: Formatted message.
+        :rtype: str
+        """
+        # noinspection PyBroadException
+        try:
+            return record.getMessage() % vars(record)
+        except Exception:
+            return record.getMessage()
+
     def serialize_record(self, record):
         """Serialize logging record into a dict
 
@@ -67,8 +82,7 @@ class GELFFormatter(logging.Formatter):
             if not record.exc_text:
                 record.exc_text = self.formatException(record.exc_info)
 
-        record.message = record.getMessage() % vars(record)
-
+        record.message = self.get_record_message(record)
         record.full_message = ""
 
         if record.exc_text:
