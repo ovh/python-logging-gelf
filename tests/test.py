@@ -6,8 +6,7 @@ import json
 from logging_gelf.formatters import GELFFormatter
 
 
-class TestStackTrace(unittest.TestCase):
-
+class TestFormatter(unittest.TestCase):
     def setUp(self) -> None:
         self.logger = logging.getLogger("gelf")
         self.logger.setLevel(logging.INFO)
@@ -18,6 +17,19 @@ class TestStackTrace(unittest.TestCase):
         self.logger.addHandler(handler)
 
         super().setUp()
+
+    def test_handle_format_exception(self):
+        self.logger.info("hello %s!", "beautiful world!")
+
+        log = json.loads(self.log_stream.getvalue())
+        self.assertNotEqual(log, "")
+
+    def test_has_host(self):
+        self.logger.info("hello %s!", "world")
+
+        log = json.loads(self.log_stream.getvalue())
+        self.assertIn("host", log)
+        self.assertNotEqual("", log["host"])
 
     def test_short_message(self):
         self.logger.info("hello %s!", "world")
@@ -52,5 +64,3 @@ class TestStackTrace(unittest.TestCase):
 
         log = json.loads(self.log_stream.getvalue())
         self.assertNotIn("full_message", log)
-
-

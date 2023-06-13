@@ -6,15 +6,14 @@ Logging GELF
    :target: https://pypi.python.org/pypi/logging-gelf/
    :alt: Latest Version
 
-.. image:: https://travis-ci.org/ovh/python-logging-gelf.svg?branch=master
-   :target: https://travis-ci.org/ovh/python-logging-gelf
-   :alt: Latest version
+.. image:: https://github.com/ovh/python-logging-gelf/actions/workflows/test.yml/badge.svg
+   :target: https://github.com/ovh/python-logging-gelf/actions/workflows/test.yml
+   :alt: Build Status
 
 
 .. image:: https://readthedocs.org/projects/logging-gelf/badge/?version=latest
    :target: http://logging-gelf.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
-
 
 A python logging bundle to send logs using GELF. This is a rewrote of `Djehouty <https://github.com/ovh/djehouty>`_
 
