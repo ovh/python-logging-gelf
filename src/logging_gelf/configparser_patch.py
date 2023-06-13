@@ -6,11 +6,9 @@
 
 
 """
-import json
 import logging
 from logging import config
 from logging_gelf.formatters import GELFFormatter
-from logging_gelf.schemas import GelfSchema
 
 
 def _create_formatters(cp):

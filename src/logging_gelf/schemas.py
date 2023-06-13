@@ -12,9 +12,10 @@ Schema allow to specify a mapping for :class:`logging.LogRecord`. It based on
 """
 import socket
 import time
-from marshmallow import Schema, fields, EXCLUDE
+
+from marshmallow import Schema, fields, EXCLUDE, post_dump
 from logging_gelf import SYSLOG_LEVELS
-from marshmallow import post_dump
+
 
 GELF_1_1_FIELDS = [
     'version', 'host', 'short_message', 'full_message', 'timestamp', 'level',
@@ -96,4 +97,5 @@ class GelfSchema(Schema):
     def remove_empty_values(self, data, **kwargs):
         return {
             key: value for key, value in data.items()
-            if value is not None and value != ""        }
+            if value is not None and value != ""
+        }
