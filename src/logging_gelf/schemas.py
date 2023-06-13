@@ -27,7 +27,7 @@ class GelfSchema(Schema):
         unknown = EXCLUDE
 
     version = fields.Constant("1.1")
-    host = fields.String(required=True, default=socket.gethostname)
+    host = fields.Constant(socket.gethostname())
     message = fields.String(data_key="short_message")
     full_message = fields.String()
     timestamp = fields.Method('to_timestamp')
