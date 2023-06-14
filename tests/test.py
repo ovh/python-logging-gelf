@@ -64,3 +64,12 @@ class TestFormatter(unittest.TestCase):
 
         log = json.loads(self.log_stream.getvalue())
         self.assertNotIn("full_message", log)
+
+    def test_exception_as_message(self):
+        try:
+            raise Exception("failed to xxx")
+        except Exception as exc:
+            self.logger.exception(exc)
+
+        log = json.loads(self.log_stream.getvalue())
+        self.assertEqual("failed to xxx", log["short_message"])

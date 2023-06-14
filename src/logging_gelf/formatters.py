@@ -86,7 +86,7 @@ class GELFFormatter(logging.Formatter):
         record.full_message = ""
 
         if record.exc_text:
-            if record.msg[-1:] != "\n":
+            if record.message[-1:] != "\n":
                 record.full_message = record.full_message + "\n"
             record.full_message = record.full_message + record.exc_text
 
