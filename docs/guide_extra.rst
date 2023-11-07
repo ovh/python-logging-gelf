@@ -33,4 +33,4 @@ To forward extra send in :class:`logging.LogRecord`, we need customize the marsh
 
 .. note::
 
-    As we ca see, the extra var *username* is append as an additional value (prefixed by '_')
+    As we can see, the extra var *username* is append as an additional value (prefixed by '_')
