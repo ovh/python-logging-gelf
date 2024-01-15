@@ -43,9 +43,11 @@ class GELFTCPSocketHandler(SocketHandler):
             )
 
         if self.use_tls is True:
-            return ssl.wrap_socket(
-                sock, cert_reqs=self.cert_reqs, ca_certs=self.ca_certs
-            )
+            context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+            context.verify_mode = self.cert_reqs
+            if self.ca_certs:
+                context.load_verify_locations(self.ca_certs)
+            return context.wrap_socket(sock=sock)
         return sock
 
     def makePickle(self, record):
