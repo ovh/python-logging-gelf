@@ -31,7 +31,7 @@ class StringJSONEncoder(json.JSONEncoder):
 class GELFFormatter(logging.Formatter):
     """A GELF formatter to format a :class:`logging.LogRecord` into GELF.
 
-    :param logging_gelf.schemas.GelfSchema schema: The marshmallow schema to
+    :param type[logging_gelf.schemas.GelfSchema] schema: The marshmallow schema to
     use to format data.
     :param bool null_character: Append a '\0' at the end of the string. It
     depends on the input used.
